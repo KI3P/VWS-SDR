@@ -28387,7 +28387,7 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "Vienna Wireless Society Software Defined Receiver\nRF Front End, Rev 1\nXX JANUARY 2025"
+	(gr_text "Vienna Wireless Society Software Defined Receiver\nRF Front End, Rev 1\n13 FEBRUARY 2025"
 		(at 82.804 104.394 0)
 		(layer "F.SilkS")
 		(uuid "fba535f5-8ca4-46e0-8553-06506eef1ba0")

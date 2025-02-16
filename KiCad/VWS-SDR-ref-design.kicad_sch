@@ -6,7 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "VWS HF SDR")
-		(date "2025-01-06")
+		(date "2025-02-13")
 		(rev "V3")
 		(comment 1 "Heavily derived from T41 V12 RF board")
 		(comment 2 "Designed by Oliver KI3P")
@@ -9776,7 +9776,6 @@
 	)
 	(label "CLK2"
 		(at 52.07 143.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9787,7 +9786,6 @@
 	)
 	(label "I_out"
 		(at 262.89 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9798,7 +9796,6 @@
 	)
 	(label "SCL"
 		(at 52.07 146.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9809,7 +9806,6 @@
 	)
 	(label "CLK1"
 		(at 52.07 140.97 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9820,7 +9816,6 @@
 	)
 	(label "SDA"
 		(at 52.07 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9831,7 +9826,6 @@
 	)
 	(label "SCL"
 		(at 109.22 139.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9842,7 +9836,6 @@
 	)
 	(label "Q_out"
 		(at 262.89 52.07 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9853,7 +9846,6 @@
 	)
 	(label "SDA"
 		(at 109.22 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9864,7 +9856,6 @@
 	)
 	(label "CLK1"
 		(at 97.79 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9875,7 +9866,6 @@
 	)
 	(label "CLK0"
 		(at 52.07 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9886,7 +9876,6 @@
 	)
 	(label "CLK0"
 		(at 97.79 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9949,6 +9938,24 @@
 			)
 		)
 		(property "Mouser Part Number" "875-HZ1206E601R-10"
+			(at 251.46 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 251.46 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "HZ1206E601R-10"
 			(at 251.46 72.39 0)
 			(effects
 				(font
@@ -10028,6 +10035,24 @@
 			)
 		)
 		(property "Mouser Part Number" "712-CONSMA001-G"
+			(at 22.86 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 22.86 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CONSMA001-G"
 			(at 22.86 109.22 0)
 			(effects
 				(font
@@ -10171,6 +10196,24 @@
 			)
 		)
 		(property "Mouser Part Number" "875-HZ1206E601R-10"
+			(at 205.74 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 205.74 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "HZ1206E601R-10"
 			(at 205.74 152.4 0)
 			(effects
 				(font
@@ -10387,6 +10430,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 208.28 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-JW-512ELF"
+			(at 208.28 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "089e815d-88ea-4a54-b822-61433115f8af")
 		)
@@ -10531,6 +10592,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 185.42 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-1002ELF"
+			(at 185.42 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b0bfadb4-0083-46d8-bbc1-f678a693c83e")
 		)
@@ -10610,6 +10689,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 213.36 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C106K4PACTU"
+			(at 213.36 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "a8d8c6b3-de62-4518-9d3e-e103021c73f5")
 		)
@@ -10679,6 +10776,24 @@
 			)
 		)
 		(property "Mouser Part Number" "595-MC33078DR"
+			(at 236.22 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 236.22 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MC33078DR"
 			(at 236.22 48.26 0)
 			(effects
 				(font
@@ -10980,6 +11095,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 110.49 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
+			(at 110.49 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "5e872d59-a8d8-438b-ab84-99d9d35f0f04")
 		)
@@ -11003,7 +11136,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "1ea3b0d9-1359-4a5a-aacc-5749771d814e")
 		(property "Reference" "TP3"
 			(at 149.86 50.8 0)
@@ -11051,6 +11184,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 154.94 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 154.94 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 154.94 48.26 0)
 			(effects
 				(font
@@ -11199,6 +11350,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 173.99 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MC33078DR"
+			(at 173.99 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "4"
 			(uuid "c993e129-ae2a-4c33-bc62-0a07923c53da")
 		)
@@ -11240,7 +11409,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "2144145d-efa2-40a6-9115-fbdf2354108b")
 		(property "Reference" "TP8"
 			(at 29.083 104.7059 0)
@@ -11288,6 +11457,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 30.48 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 30.48 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 30.48 109.22 0)
 			(effects
 				(font
@@ -11430,6 +11617,24 @@
 			)
 		)
 		(property "Mouser Part Number" "C1206C104K5RACTU"
+			(at 209.55 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 209.55 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
 			(at 209.55 140.97 0)
 			(effects
 				(font
@@ -11591,7 +11796,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "296d26b6-e9f2-4d49-98e7-e8c7f51e8f98")
 		(property "Reference" "G6"
 			(at 262.89 31.75 0)
@@ -11639,6 +11844,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 261.62 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 261.62 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 261.62 35.56 0)
 			(effects
 				(font
@@ -11788,6 +12011,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 246.38 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
+			(at 246.38 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "04fa31db-3096-4e3e-bb9a-a0e84a406d3d")
 		)
@@ -11859,6 +12100,24 @@
 			)
 		)
 		(property "Mouser Part Number" "81-LQM31PN1R5M00L"
+			(at 55.88 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 55.88 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "LQM31PN1R5M00L"
 			(at 55.88 102.87 0)
 			(effects
 				(font
@@ -12077,6 +12336,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 223.52 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "ESK475M016AC3AA"
+			(at 223.52 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ebe4994e-36e9-4c5a-bdf4-4369f1963ade")
 		)
@@ -12099,7 +12376,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "35ffff30-98aa-49d2-b8a0-563596826f41")
 		(property "Reference" "TP5"
 			(at 194.31 96.52 0)
@@ -12147,6 +12424,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 199.39 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 199.39 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 199.39 99.06 0)
 			(effects
 				(font
@@ -12371,7 +12666,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "3f5e379d-a58d-4845-bc72-a75e0a706047")
 		(property "Reference" "G3"
 			(at 157.48 29.21 0)
@@ -12419,6 +12714,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 156.21 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 156.21 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 156.21 33.02 0)
 			(effects
 				(font
@@ -12495,6 +12808,24 @@
 			)
 		)
 		(property "Mouser Part Number" "187-CL31B105KBHNNNE"
+			(at 147.32 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 147.32 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "KGM31HR71C105KU"
 			(at 147.32 53.34 0)
 			(effects
 				(font
@@ -12582,6 +12913,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 181.61 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-1002ELF"
+			(at 181.61 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "5465480c-5557-49cb-aa78-e7be74400e6b")
 		)
@@ -12661,6 +13010,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 49.53 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 49.53 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5ea9a8ce-c59b-4e21-a2a2-ead79314d543")
 		)
@@ -12729,6 +13096,24 @@
 			)
 		)
 		(property "Mouser Part Number" "791-1206B181K160CT"
+			(at 226.06 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 226.06 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "KGM31BCG2A181FT"
 			(at 226.06 102.87 0)
 			(effects
 				(font
@@ -12880,6 +13265,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 160.02 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-1000ELF"
+			(at 160.02 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "c0b787ad-9f34-4267-a228-a623415cbf45")
 		)
@@ -12957,6 +13360,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 218.44 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-JW-512ELF"
+			(at 218.44 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "57ab0080-c423-4c1c-a673-44417aeed4d1")
 		)
@@ -12979,7 +13400,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board no)
-		(dnp yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4ae93f6d-0692-49f4-9bf4-4d967c468810")
 		(property "Reference" "J4"
@@ -13027,6 +13448,24 @@
 		)
 		(property "Tayda" "A-1310"
 			(at 44.45 189.23 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 44.45 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 44.45 189.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13110,7 +13549,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "4b3be51d-2c2f-4e97-a904-48b28fe53502")
 		(property "Reference" "G4"
 			(at 199.39 53.34 0)
@@ -13158,6 +13597,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 198.12 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 198.12 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 198.12 57.15 0)
 			(effects
 				(font
@@ -13297,6 +13754,24 @@
 			)
 		)
 		(property "Mouser Part Number" "875-HZ1206E601R-10"
+			(at 195.58 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 195.58 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "HZ1206E601R-10"
 			(at 195.58 81.28 0)
 			(effects
 				(font
@@ -13447,6 +13922,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 160.02 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-1000ELF"
+			(at 160.02 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "dc1c2ff0-13f6-4a11-afc5-16220dcc1c20")
 		)
@@ -13526,6 +14019,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 115.57 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "HZ1206E601R-10"
+			(at 115.57 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "52ca0b76-2e42-4ec6-9db4-2a5a74ad1cf3")
 		)
@@ -13595,6 +14106,24 @@
 			)
 		)
 		(property "Mouser Part Number" "652-CR1206FX-2201ELF"
+			(at 172.72 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 172.72 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-2201ELF"
 			(at 172.72 41.91 0)
 			(effects
 				(font
@@ -13682,6 +14211,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 190.5 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
+			(at 190.5 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d66148c3-4a18-422e-aa98-6c83797e8dcc")
 		)
@@ -13704,7 +14251,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "573e328d-6cf7-426f-b678-7902b0ff0962")
 		(property "Reference" "G10"
 			(at 92.71 138.43 0)
@@ -13752,6 +14299,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 88.9 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 88.9 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 88.9 137.16 0)
 			(effects
 				(font
@@ -13826,6 +14391,24 @@
 			)
 		)
 		(property "Mouser Part Number" "490-SJ1-3515N"
+			(at 276.86 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 276.86 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SJ1-3515N"
 			(at 276.86 71.12 0)
 			(effects
 				(font
@@ -13986,6 +14569,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 152.4 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C103K5RAC7210"
+			(at 152.4 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "cfd9d9e6-4a5f-4380-9629-08c9d90a6719")
 		)
@@ -14122,6 +14723,24 @@
 			)
 		)
 		(property "Mouser Part Number" "652-CR1206FX-1002ELF"
+			(at 93.98 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 93.98 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-1002ELF"
 			(at 93.98 88.9 0)
 			(effects
 				(font
@@ -14340,6 +14959,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 115.57 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SN74CBTLV3253DR"
+			(at 115.57 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "13"
 			(uuid "119ae10b-c812-4182-8847-e921e7721faa")
 		)
@@ -14459,6 +15096,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 218.44 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-JW-512ELF"
+			(at 218.44 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "c6db1e1f-9746-406c-bf1f-36392a01c482")
 		)
@@ -14527,6 +15182,24 @@
 			)
 		)
 		(property "Mouser Part Number" "875-HZ1206E601R-10"
+			(at 203.2 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 203.2 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "HZ1206E601R-10"
 			(at 203.2 137.16 0)
 			(effects
 				(font
@@ -14614,6 +15287,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 49.53 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 49.53 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "dbc4139c-539d-49b9-8bdb-fa8fc2e50674")
 		)
@@ -14690,6 +15381,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 41.91 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 41.91 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3a4189b5-d9da-4cd4-aaca-170ba4c2d617")
 		)
@@ -14710,7 +15419,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "6573ac05-d477-4290-acf7-eed69d09dbab")
 		(property "Reference" "TP2"
 			(at 148.59 99.06 0)
@@ -14758,6 +15467,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 153.67 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 153.67 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 153.67 96.52 0)
 			(effects
 				(font
@@ -14834,6 +15561,24 @@
 			)
 		)
 		(property "Mouser Part Number" "581-12065C101KAT2A"
+			(at 226.06 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 226.06 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C3216C0G2J101G060AA"
 			(at 226.06 66.04 0)
 			(effects
 				(font
@@ -14987,6 +15732,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 220.98 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "ESK475M016AC3AA"
+			(at 220.98 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "fef803e2-130c-4d77-b5fa-f0fe912169d9")
 		)
@@ -15056,6 +15819,24 @@
 			)
 		)
 		(property "Mouser Part Number" "652-CR1206JW-512ELF"
+			(at 233.68 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 233.68 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-JW-512ELF"
 			(at 233.68 83.82 0)
 			(effects
 				(font
@@ -15208,6 +15989,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 226.06 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "KGM31BCG2A181FT"
+			(at 226.06 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "ecf47c92-4beb-4a2b-b948-9f9f69acd1ec")
 		)
@@ -15230,7 +16029,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "75cb16cb-5961-4b26-a7d8-b6e45f326551")
 		(property "Reference" "G9"
 			(at 87.63 132.08 0)
@@ -15278,6 +16077,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 86.36 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 86.36 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 86.36 135.89 0)
 			(effects
 				(font
@@ -15371,7 +16188,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "7a07765d-a133-4304-8a2c-da675bfbd7d4")
 		(property "Reference" "G7"
 			(at 261.62 101.6 0)
@@ -15419,6 +16236,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 260.35 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 260.35 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 260.35 105.41 0)
 			(effects
 				(font
@@ -15493,6 +16328,24 @@
 			)
 		)
 		(property "Mouser Part Number" "652-CR1206JW-512ELF"
+			(at 233.68 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 233.68 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-JW-512ELF"
 			(at 233.68 35.56 0)
 			(effects
 				(font
@@ -15579,6 +16432,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 147.32 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "KGM31HR71C105KU"
+			(at 147.32 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "7b774635-e022-4e93-8add-a183a6f38aae")
 		)
@@ -15601,7 +16472,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "7cb335db-b91b-488f-b803-d055a32fd1d2")
 		(property "Reference" "TP4"
 			(at 190.5 48.26 0)
@@ -15649,6 +16520,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 195.58 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 195.58 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 195.58 50.8 0)
 			(effects
 				(font
@@ -15797,6 +16686,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 49.53 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C106K4PACTU"
+			(at 49.53 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "5044a283-7fe1-420f-b8ac-98169ef8e35b")
 		)
@@ -15933,6 +16840,24 @@
 			)
 		)
 		(property "Mouser Part Number" "C1206C104K5RACTU"
+			(at 193.04 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 193.04 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
 			(at 193.04 111.76 0)
 			(effects
 				(font
@@ -16105,7 +17030,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "GPIO Breakout"
+		(property "Value" "GPIO Breakout2"
 			(at 97.028 175.26 0)
 			(effects
 				(font
@@ -16133,6 +17058,33 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x10, script generated"
+			(at 99.06 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 99.06 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 99.06 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Tayda" "A-1306"
 			(at 99.06 172.72 0)
 			(effects
 				(font
@@ -16253,7 +17205,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "8f42706a-72d7-4cdc-9490-8ef40a65bbf0")
 		(property "Reference" "J6"
 			(at 75.692 148.1977 0)
@@ -16290,6 +17242,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated"
+			(at 67.31 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 67.31 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 67.31 148.59 0)
 			(effects
 				(font
@@ -16383,6 +17353,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 72.39 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
+			(at 72.39 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "bf0f3e83-d738-4ace-ad67-fcb795e46347")
 		)
@@ -16454,6 +17442,24 @@
 			)
 		)
 		(property "Mouser Part Number" "80-C1206C103K5R7210"
+			(at 152.4 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 152.4 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C103K5RAC7210"
 			(at 152.4 88.9 0)
 			(effects
 				(font
@@ -16540,6 +17546,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 198.12 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C103K5RAC7210"
+			(at 198.12 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e5376507-98fe-45af-b3ba-ce90eef3e369")
 		)
@@ -16611,6 +17635,24 @@
 			)
 		)
 		(property "Mouser Part Number" "80-C1206C103K5R7210"
+			(at 152.4 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 152.4 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C103K5RAC7210"
 			(at 152.4 40.64 0)
 			(effects
 				(font
@@ -16706,7 +17748,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "98b737e9-777b-4b04-870c-48014c5c1ac2")
 		(property "Reference" "TP11"
 			(at 64.77 138.43 0)
@@ -16754,6 +17796,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 69.85 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 69.85 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 69.85 140.97 0)
 			(effects
 				(font
@@ -16835,6 +17895,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 250.19 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CRCW12060000Z0EAC"
+			(at 250.19 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "290a5c1f-f8ab-44d4-919f-ea81c1ffd2e9")
 		)
@@ -16903,6 +17981,24 @@
 			)
 		)
 		(property "Mouser Part Number" "595-MC33078DR"
+			(at 179.07 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 179.07 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MC33078DR"
 			(at 179.07 83.82 0)
 			(effects
 				(font
@@ -17008,6 +18104,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 181.61 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-1002ELF"
+			(at 181.61 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3cb1e454-4ec2-49a3-bd1f-9b85c89426b0")
 		)
@@ -17095,7 +18209,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "9fdd473a-d07b-4b62-ba90-f49c9edddbff")
 		(property "Reference" "TP6"
 			(at 257.81 45.72 0)
@@ -17143,6 +18257,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 262.89 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 262.89 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 262.89 48.26 0)
 			(effects
 				(font
@@ -17226,6 +18358,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 147.32 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "KGM31HR71C105KU"
+			(at 147.32 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "9782c15b-470e-4a5e-93b8-ca6c32cd8cec")
 		)
@@ -17248,7 +18398,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "a36076e9-2163-495d-ab37-4c030b38dc95")
 		(property "Reference" "G8"
 			(at 17.78 115.57 0)
@@ -17304,6 +18454,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 21.59 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 21.59 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ff2f99e7-3db7-4171-8a83-f11f760d4d87")
 		)
@@ -17323,7 +18491,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "a8991f4e-cc58-413d-87da-0253edb36737")
 		(property "Reference" "TP1"
 			(at 86.233 113.7341 0)
@@ -17371,6 +18539,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 87.63 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 87.63 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 87.63 109.22 0)
 			(effects
 				(font
@@ -17455,6 +18641,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 41.91 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 41.91 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "838e18fe-40ab-46b2-a736-8937378ae07f")
 		)
@@ -17486,7 +18690,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "GPIO Breakout"
+		(property "Value" "GPIO Breakout1"
 			(at 178.308 163.322 0)
 			(effects
 				(font
@@ -17514,6 +18718,33 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x15, script generated"
+			(at 163.83 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 163.83 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 163.83 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Tayda" "A-1669"
 			(at 163.83 167.64 0)
 			(effects
 				(font
@@ -17630,6 +18861,24 @@
 			)
 		)
 		(property "Mouser Part Number" "358-SC0915"
+			(at 130.81 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 130.81 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SC0915"
 			(at 130.81 160.02 0)
 			(effects
 				(font
@@ -17783,7 +19032,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "ac217432-fe1e-447d-aca5-0fe9887aad1d")
 		(property "Reference" "G5"
 			(at 203.2 101.6 0)
@@ -17831,6 +19080,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 201.93 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 201.93 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 201.93 105.41 0)
 			(effects
 				(font
@@ -18175,6 +19442,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 172.72 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-2201ELF"
+			(at 172.72 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "6129ef90-943a-4ad6-a7a9-1aacc2e66a88")
 		)
@@ -18235,6 +19520,33 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 254 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 254 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 254 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Tayda" "A-1069"
 			(at 254 60.96 0)
 			(effects
 				(font
@@ -18390,6 +19702,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 55.88 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-62R0ELF"
+			(at 55.88 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "17ace5b7-66f2-4fda-9020-76fa66254d71")
 		)
@@ -18527,6 +19857,24 @@
 			)
 		)
 		(property "Mouser Part Number" "652-CR1206FX-5100ELF"
+			(at 77.47 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 77.47 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-5100ELF"
 			(at 77.47 97.79 0)
 			(effects
 				(font
@@ -18680,6 +20028,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 147.32 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "KGM31HR71C105KU"
+			(at 147.32 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "969426dd-79b2-438a-a145-bba25c55ea44")
 		)
@@ -18759,6 +20125,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 86.36 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-1002ELF"
+			(at 86.36 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "629eca48-46ae-4b10-902c-d2551e9f5295")
 		)
@@ -18781,7 +20165,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "beca46b4-a702-405d-a2b8-f57a29372965")
 		(property "Reference" "TP7"
 			(at 252.73 93.98 0)
@@ -18829,6 +20213,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 257.81 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 257.81 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 257.81 96.52 0)
 			(effects
 				(font
@@ -18977,6 +20379,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 208.28 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-JW-512ELF"
+			(at 208.28 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "268e1777-6a66-43ed-995e-8a81d069120c")
 		)
@@ -19046,6 +20466,24 @@
 			)
 		)
 		(property "Mouser Part Number" "652-CR1206FX-1000ELF"
+			(at 161.29 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 161.29 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-1000ELF"
 			(at 161.29 48.26 0)
 			(effects
 				(font
@@ -19133,6 +20571,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 213.36 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C106K4PACTU"
+			(at 213.36 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "fa36f838-979c-471f-87e6-75ddbf6aa27f")
 		)
@@ -19155,7 +20611,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board no)
-		(dnp yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c450c5cb-be67-4832-adf6-f913251b0e20")
 		(property "Reference" "J5"
@@ -19203,6 +20659,24 @@
 		)
 		(property "Tayda" "A-1310"
 			(at 44.45 180.34 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 44.45 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 44.45 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19405,6 +20879,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 250.19 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CRCW12060000Z0EAC"
+			(at 250.19 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d3f05edc-4877-4590-824b-274021ff5595")
 		)
@@ -19547,6 +21039,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 62.23 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
+			(at 62.23 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "27fb2165-ee70-44da-85a5-48e083677a09")
 		)
@@ -19616,6 +21126,24 @@
 			)
 		)
 		(property "Mouser Part Number" "595-MC33078DR"
+			(at 238.76 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 238.76 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MC33078DR"
 			(at 238.76 74.93 0)
 			(effects
 				(font
@@ -19785,6 +21313,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 175.26 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MC33078DR"
+			(at 175.26 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3b0f527b-a26c-42ad-95c4-1b5666b6fb5c")
 		)
@@ -19937,6 +21483,24 @@
 			)
 		)
 		(property "Mouser Part Number" "652-CR1206JW-512ELF"
+			(at 218.44 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 218.44 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-JW-512ELF"
 			(at 218.44 35.56 0)
 			(effects
 				(font
@@ -20099,7 +21663,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "d26a6697-5078-4adc-9159-b3e0779ecbf9")
 		(property "Reference" "TP12"
 			(at 71.12 140.97 0)
@@ -20147,6 +21711,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 76.2 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 76.2 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 76.2 143.51 0)
 			(effects
 				(font
@@ -20229,6 +21811,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 161.29 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-1000ELF"
+			(at 161.29 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e6f03551-7d08-47e2-838d-df75ff7105b0")
 		)
@@ -20298,6 +21898,24 @@
 			)
 		)
 		(property "Mouser Part Number" "C1206C104K5RACTU"
+			(at 35.56 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 35.56 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
 			(at 35.56 109.22 0)
 			(effects
 				(font
@@ -20442,6 +22060,24 @@
 			)
 		)
 		(property "Mouser Part Number" "C1206C104K5RACTU"
+			(at 212.09 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 212.09 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
 			(at 212.09 156.21 0)
 			(effects
 				(font
@@ -20595,6 +22231,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 77.47 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-5100ELF"
+			(at 77.47 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b40d9d8d-fcd2-4bef-bba6-f503ea6ad52b")
 		)
@@ -20673,6 +22327,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 152.4 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C103K5RAC7210"
+			(at 152.4 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d2bf6f07-0a2c-4615-bfcf-6dbd7c8e9001")
 		)
@@ -20695,7 +22367,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "e047887d-c7d9-4235-92d6-9ce571c9ab82")
 		(property "Reference" "G2"
 			(at 158.75 114.3 0)
@@ -20743,6 +22415,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 157.48 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 157.48 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 157.48 118.11 0)
 			(effects
 				(font
@@ -20817,6 +22507,24 @@
 			)
 		)
 		(property "Mouser Part Number" "652-CR1206JW-512ELF"
+			(at 218.44 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 218.44 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-JW-512ELF"
 			(at 218.44 83.82 0)
 			(effects
 				(font
@@ -20903,6 +22611,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 189.23 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
+			(at 189.23 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "69983f13-a4a5-484c-a6fa-868cc2651303")
 		)
@@ -20925,7 +22651,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "e2df6073-7959-4cd3-8c6b-83fa08e03043")
 		(property "Reference" "TP10"
 			(at 57.15 135.89 0)
@@ -20973,6 +22699,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 62.23 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 62.23 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 62.23 138.43 0)
 			(effects
 				(font
@@ -21047,6 +22791,24 @@
 			)
 		)
 		(property "Mouser Part Number" "595-MC33078DR"
+			(at 236.22 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 236.22 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "MC33078DR"
 			(at 236.22 96.52 0)
 			(effects
 				(font
@@ -21216,6 +22978,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 46.99 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "GALI-S66+"
+			(at 46.99 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "069af2a2-750c-452a-b42a-19a12f82fc36")
 		)
@@ -21371,7 +23151,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "f01e4173-3878-4ba1-9d7f-185214882558")
 		(property "Reference" "J7"
@@ -21411,6 +23191,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 245.11 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 245.11 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 245.11 139.7 0)
 			(effects
 				(font
@@ -21501,6 +23299,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 43.18 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C104K5RACTU"
+			(at 43.18 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "c1863e99-28c0-41b9-8b2b-ee63fce84389")
 		)
@@ -21571,7 +23387,25 @@
 				(hide yes)
 			)
 		)
-		(property "Tayda" "A-6992"
+		(property "Tayda" ""
+			(at 43.18 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" "2045"
+			(at 43.18 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 43.18 146.05 0)
 			(effects
 				(font
@@ -21804,6 +23638,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 200.66 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C1206C103K5RAC7210"
+			(at 200.66 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "5b9c6890-b9f1-4c2f-b6ee-6eb97fc8a928")
 		)
@@ -21883,6 +23735,24 @@
 				(hide yes)
 			)
 		)
+		(property "Adafruit PN" ""
+			(at 226.06 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C3216C0G2J101G060AA"
+			(at 226.06 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "30076715-1e84-4acc-bbaa-8cb836677a7c")
 		)
@@ -21905,7 +23775,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "fa7781bf-5a77-4160-816b-c37fa62e4881")
 		(property "Reference" "G1"
 			(at 88.9 116.84 0)
@@ -21953,6 +23823,24 @@
 			)
 		)
 		(property "Mouser Part Number" ""
+			(at 87.63 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 87.63 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
 			(at 87.63 120.65 0)
 			(effects
 				(font
@@ -22029,6 +23917,24 @@
 			)
 		)
 		(property "Mouser Part Number" "652-CR1206FX-1002ELF"
+			(at 185.42 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Adafruit PN" ""
+			(at 185.42 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CR1206-FX-1002ELF"
 			(at 185.42 106.68 0)
 			(effects
 				(font
