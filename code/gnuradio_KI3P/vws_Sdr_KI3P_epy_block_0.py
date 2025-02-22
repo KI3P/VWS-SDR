@@ -33,7 +33,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         return
 
     def handle_msg(self, msg):
-        self.new_center_freq = pmt.to_long(msg) - self.IF_frequency_kHz
+        self.new_center_freq = pmt.to_long(pmt.cdr(msg)) - self.IF_frequency_kHz
         if (self.new_center_freq != self.center_freq):
             print("Updated frequency %d"%self.new_center_freq)
             self.serial.write(b'FR %d\n'%(self.new_center_freq*1000))
@@ -43,6 +43,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     def work(self, input_items, output_items):
         """example: multiply with constant"""
         if (self.new_center_freq != self.center_freq):
-            print("Updated frequency %d"%self.new_center_freq)
+            #print("Updated frequency %d"%self.new_center_freq)
             self.center_freq = self.new_center_freq
         return 

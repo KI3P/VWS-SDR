@@ -162,6 +162,18 @@ blocks:
     coordinate: [16, 172.0]
     rotation: 0
     state: enabled
+- name: tune_freq_kHz
+  id: variable
+  parameters:
+    comment: ''
+    value: '10000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1312, 12.0]
+    rotation: 0
+    state: true
 - name: volume
   id: variable_qtgui_range
   parameters:
@@ -249,7 +261,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: Use "aplay -l" to get the sound card hardware address
     device_name: hw:0,0
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -268,7 +280,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: output = phase*R - gain*L
     maxoutbuf: '0'
     minoutbuf: '0'
     num_inputs: '2'
@@ -286,7 +298,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: output = R - gain*L*phase
     maxoutbuf: '0'
     minoutbuf: '0'
     num_inputs: '2'
@@ -296,7 +308,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 304.0]
+    coordinate: [720, 288.0]
     rotation: 0
     state: true
 - name: blocks_add_xx_0_1
@@ -346,7 +358,21 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1168, 240.0]
+    coordinate: [1216, 240.0]
+    rotation: 0
+    state: true
+- name: blocks_msgpair_to_var_0
+  id: blocks_msgpair_to_var
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    target: tune_freq_kHz
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1232, 132.0]
     rotation: 0
     state: true
 - name: blocks_multiply_const_vxx_0
@@ -354,7 +380,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: output = -gain*L
     const: -gain
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -364,7 +390,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [288, 188.0]
+    coordinate: [336, 212.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_vxx_0_0
@@ -372,7 +398,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: output = phase*R
     const: phase
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -382,7 +408,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [480, 116.0]
+    coordinate: [424, 132.0]
     rotation: 0
     state: true
 - name: blocks_multiply_const_vxx_0_0_0
@@ -390,7 +416,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: output = -gain*L*phase
     const: phase
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -400,7 +426,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 300.0]
+    coordinate: [480, 260.0]
     rotation: 0
     state: true
 - name: blocks_multiply_const_vxx_0_0_1
@@ -480,7 +506,9 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: 'if phase < 0: output = -gain*L
+
+      if phase >= 0: output = phase*R - gain*L'
     enabled: 'True'
     input_index: 0 if phase < 0 else 1
     maxoutbuf: '0'
@@ -503,7 +531,9 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: 'if phase < 0: output = R - gain*L*phase
+
+      if phase >= 0: output = R'
     enabled: 'True'
     input_index: 0 if phase < 0 else 1
     maxoutbuf: '0'
@@ -518,7 +548,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [928, 300.0]
+    coordinate: [920, 316.0]
     rotation: 0
     state: true
 - name: epy_block_0
@@ -541,13 +571,13 @@ blocks:
       \        self.new_center_freq = 10000\n        self.center_freq = 10000\n  \
       \      self.IF_frequency_kHz = 6\n        if self.serial_port is not None:\n\
       \            self.serial = serial.Serial(self.serial_port,115200)\n        return\n\
-      \n    def handle_msg(self, msg):\n        self.new_center_freq = pmt.to_long(msg)\
+      \n    def handle_msg(self, msg):\n        self.new_center_freq = pmt.to_long(pmt.cdr(msg))\
       \ - self.IF_frequency_kHz\n        if (self.new_center_freq != self.center_freq):\n\
       \            print(\"Updated frequency %d\"%self.new_center_freq)\n        \
       \    self.serial.write(b'FR %d\\n'%(self.new_center_freq*1000))\n          \
       \  self.center_freq = self.new_center_freq\n        return\n\n    def work(self,\
       \ input_items, output_items):\n        \"\"\"example: multiply with constant\"\
-      \"\"\n        if (self.new_center_freq != self.center_freq):\n            print(\"\
+      \"\"\n        if (self.new_center_freq != self.center_freq):\n            #print(\"\
       Updated frequency %d\"%self.new_center_freq)\n            self.center_freq =\
       \ self.new_center_freq\n        return \n"
     affinity: ''
@@ -555,7 +585,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    serial_port: '"/dev/ttyACM1"'
+    serial_port: '"/dev/ttyACM0"'
   states:
     _io_cache: ('Update tune frequency', 'blk', [('serial_port', 'None')], [('frequencyPort',
       'message', 1)], [], 'Embedded Python Block example - a simple multiply const',
@@ -563,7 +593,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1168, 76.0]
+    coordinate: [1224, 76.0]
     rotation: 0
     state: enabled
 - name: freq_xlating_fir_filter_xxx_0
@@ -599,134 +629,17 @@ blocks:
     coordinate: [24, 100.0]
     rotation: 0
     state: true
-- name: note_0
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: Use "aplay -l" to get the sound card hardware address
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [8, 356.0]
-    rotation: 0
-    state: true
-- name: note_1_0
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: amp*L
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [432, 196.0]
-    rotation: 0
-    state: true
 - name: note_1_0_0
   id: note
   parameters:
     alias: ''
     comment: ''
-    note: amp*L
+    note: -gain*L
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 188.0]
-    rotation: 0
-    state: true
-- name: note_1_0_0_0
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: amp*L+phs*R
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [784, 236.0]
-    rotation: 0
-    state: true
-- name: note_1_0_0_0_0
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: amp*L+phs*R
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [728, 604.0]
-    rotation: 0
-    state: true
-- name: note_1_0_0_1
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: amp*L
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [728, 484.0]
-    rotation: 0
-    state: true
-- name: note_1_0_1
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: phs*amp*L
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [488, 404.0]
-    rotation: 0
-    state: true
-- name: note_1_0_1_0
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: R+phs*amp*L
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [776, 316.0]
-    rotation: 0
-    state: true
-- name: note_1_0_1_0_0
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: R+phs*amp*L
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [728, 532.0]
-    rotation: 0
-    state: true
-- name: note_1_1_0
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: phs*R
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [624, 132.0]
+    coordinate: [800, 156.0]
     rotation: 0
     state: true
 - name: note_1_1_1
@@ -739,46 +652,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [832, 364.0]
-    rotation: 0
-    state: true
-- name: note_1_1_1_0
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: R
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [728, 652.0]
-    rotation: 0
-    state: true
-- name: note_1_1_1_0_0
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: 'phs>0:'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [640, 628.0]
-    rotation: 0
-    state: true
-- name: note_1_1_1_0_0_0
-  id: note
-  parameters:
-    alias: ''
-    comment: ''
-    note: 'phs<0:'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [640, 516.0]
+    coordinate: [832, 412.0]
     rotation: 0
     state: true
 - name: qtgui_edit_box_msg_0
@@ -788,7 +662,7 @@ blocks:
     alias: ''
     comment: ''
     gui_hint: ''
-    is_pair: 'False'
+    is_pair: 'True'
     is_static: 'True'
     key: frequency_kHz
     label: Tune Frequency [kHz]
@@ -810,7 +684,7 @@ blocks:
     alias: ''
     bw: samp_rate
     comment: ''
-    fc: '0'
+    fc: (tune_freq_kHz-if_freq_kHz)*1000
     fftsize: '1024'
     gui_hint: ''
     maxoutbuf: '0'
@@ -822,14 +696,14 @@ blocks:
     plotwaterfall: 'True'
     rate: '10'
     showports: 'False'
-    showrf: 'False'
+    showrf: 'True'
     type: complex
     wintype: window.WIN_BLACKMAN_hARRIS
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1448, 204.0]
+    coordinate: [1440, 220.0]
     rotation: 0
     state: true
 
@@ -859,6 +733,7 @@ connections:
 - [blocks_selector_0, '0', blocks_float_to_complex_0, '0']
 - [blocks_selector_0_0, '0', blocks_float_to_complex_0, '1']
 - [freq_xlating_fir_filter_xxx_0, '0', blocks_complex_to_float_0, '0']
+- [qtgui_edit_box_msg_0, msg, blocks_msgpair_to_var_0, inpair]
 - [qtgui_edit_box_msg_0, msg, epy_block_0, frequencyPort]
 
 metadata:

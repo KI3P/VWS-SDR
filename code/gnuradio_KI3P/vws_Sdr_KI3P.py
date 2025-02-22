@@ -83,6 +83,7 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.volume = volume = 0.7
+        self.tune_freq_kHz = tune_freq_kHz = 10000
         self.samp_rate = samp_rate = 48000
         self.reverse = reverse = -1
         self.phase = phase = 0
@@ -146,7 +147,7 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.qtgui_sink_x_0 = qtgui.sink_c(
             1024, #fftsize
             window.WIN_BLACKMAN_hARRIS, #wintype
-            0, #fc
+            (tune_freq_kHz-if_freq_kHz)*1000, #fc
             samp_rate, #bw
             "", #name
             True, #plotfreq
@@ -158,14 +159,14 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.qtgui_sink_x_0.set_update_time(1.0/10)
         self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.qwidget(), Qt.QWidget)
 
-        self.qtgui_sink_x_0.enable_rf_freq(False)
+        self.qtgui_sink_x_0.enable_rf_freq(True)
 
         self.top_layout.addWidget(self._qtgui_sink_x_0_win)
-        self.qtgui_edit_box_msg_0 = qtgui.edit_box_msg(qtgui.INT, '10000', 'Tune Frequency [kHz]', False, True, 'frequency_kHz', None)
+        self.qtgui_edit_box_msg_0 = qtgui.edit_box_msg(qtgui.INT, '10000', 'Tune Frequency [kHz]', True, True, 'frequency_kHz', None)
         self._qtgui_edit_box_msg_0_win = sip.wrapinstance(self.qtgui_edit_box_msg_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_edit_box_msg_0_win)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccf(1, firdes.low_pass(1,samp_rate,3000, 200), if_freq_kHz*1000, samp_rate)
-        self.epy_block_0 = epy_block_0.blk(serial_port="/dev/ttyACM1")
+        self.epy_block_0 = epy_block_0.blk(serial_port="/dev/ttyACM0")
         self.blocks_selector_0_0 = blocks.selector(gr.sizeof_float*1,0 if phase < 0 else 1,0)
         self.blocks_selector_0_0.set_enabled(True)
         self.blocks_selector_0 = blocks.selector(gr.sizeof_float*1,0 if phase < 0 else 1,0)
@@ -177,6 +178,7 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_ff(phase)
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_ff(phase)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_ff(-gain)
+        self.blocks_msgpair_to_var_0 = blocks.msg_pair_to_var(self.set_tune_freq_kHz)
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
         self.blocks_complex_to_float_0 = blocks.complex_to_float(1)
         self.blocks_add_xx_0_1 = blocks.add_vff(1)
@@ -191,6 +193,7 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
+        self.msg_connect((self.qtgui_edit_box_msg_0, 'msg'), (self.blocks_msgpair_to_var_0, 'inpair'))
         self.msg_connect((self.qtgui_edit_box_msg_0, 'msg'), (self.epy_block_0, 'frequencyPort'))
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))
         self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_multiply_xx_0_0, 1))
@@ -234,6 +237,13 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.volume = volume
         self.blocks_multiply_const_vxx_0_1.set_k(self.volume)
 
+    def get_tune_freq_kHz(self):
+        return self.tune_freq_kHz
+
+    def set_tune_freq_kHz(self, tune_freq_kHz):
+        self.tune_freq_kHz = tune_freq_kHz
+        self.qtgui_sink_x_0.set_frequency_range((self.tune_freq_kHz-self.if_freq_kHz)*1000, self.samp_rate)
+
     def get_samp_rate(self):
         return self.samp_rate
 
@@ -242,7 +252,7 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
         self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1,self.samp_rate,3000, 200))
-        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
+        self.qtgui_sink_x_0.set_frequency_range((self.tune_freq_kHz-self.if_freq_kHz)*1000, self.samp_rate)
 
     def get_reverse(self):
         return self.reverse
@@ -268,6 +278,7 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
     def set_if_freq_kHz(self, if_freq_kHz):
         self.if_freq_kHz = if_freq_kHz
         self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.if_freq_kHz*1000)
+        self.qtgui_sink_x_0.set_frequency_range((self.tune_freq_kHz-self.if_freq_kHz)*1000, self.samp_rate)
 
     def get_gain(self):
         return self.gain
