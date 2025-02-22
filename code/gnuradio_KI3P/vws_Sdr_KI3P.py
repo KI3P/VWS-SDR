@@ -22,11 +22,14 @@ if __name__ == '__main__':
             print("Warning: failed to XInitThreads()")
 
 from PyQt5 import Qt
+from PyQt5.QtCore import QObject, pyqtSlot
 from gnuradio import qtgui
 from gnuradio.filter import firdes
 import sip
+from gnuradio import analog
 from gnuradio import audio
 from gnuradio import blocks
+from gnuradio import filter
 from gnuradio import gr
 from gnuradio.fft import window
 import sys
@@ -79,21 +82,67 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
+        self.volume = volume = 0.7
         self.samp_rate = samp_rate = 48000
+        self.reverse = reverse = -1
         self.phase = phase = 0
+        self.if_freq_kHz = if_freq_kHz = 6
         self.gain = gain = 1
         self.freq = freq = 48e3
-        self.amp = amp = 0.1
+        self.bfo = bfo = 1500
 
         ##################################################
         # Blocks
         ##################################################
+        self._volume_range = Range(0, 1.0, 0.05, 0.7, 200)
+        self._volume_win = RangeWidget(self._volume_range, self.set_volume, "Volume", "counter_slider", float, QtCore.Qt.Horizontal)
+        self.top_grid_layout.addWidget(self._volume_win, 2, 0, 1, 3)
+        for r in range(2, 3):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
+        # Create the options list
+        self._reverse_options = [-1, 1, 0]
+        # Create the labels list
+        self._reverse_labels = ['Upper', 'Lower', 'BFO']
+        # Create the combo box
+        # Create the radio buttons
+        self._reverse_group_box = Qt.QGroupBox("Sideband" + ": ")
+        self._reverse_box = Qt.QHBoxLayout()
+        class variable_chooser_button_group(Qt.QButtonGroup):
+            def __init__(self, parent=None):
+                Qt.QButtonGroup.__init__(self, parent)
+            @pyqtSlot(int)
+            def updateButtonChecked(self, button_id):
+                self.button(button_id).setChecked(True)
+        self._reverse_button_group = variable_chooser_button_group()
+        self._reverse_group_box.setLayout(self._reverse_box)
+        for i, _label in enumerate(self._reverse_labels):
+            radio_button = Qt.QRadioButton(_label)
+            self._reverse_box.addWidget(radio_button)
+            self._reverse_button_group.addButton(radio_button, i)
+        self._reverse_callback = lambda i: Qt.QMetaObject.invokeMethod(self._reverse_button_group, "updateButtonChecked", Qt.Q_ARG("int", self._reverse_options.index(i)))
+        self._reverse_callback(self.reverse)
+        self._reverse_button_group.buttonClicked[int].connect(
+            lambda i: self.set_reverse(self._reverse_options[i]))
+        self.top_grid_layout.addWidget(self._reverse_group_box, 3, 2, 1, 1)
+        for r in range(3, 4):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(2, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self._phase_range = Range(-0.1, 0.1, 0.001, 0, 200)
         self._phase_win = RangeWidget(self._phase_range, self.set_phase, "'phase'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._phase_win)
         self._gain_range = Range(0, 2, 0.001, 1, 200)
         self._gain_win = RangeWidget(self._gain_range, self.set_gain, "'gain'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._gain_win)
+        self._bfo_range = Range(0, 3000, 10, 1500, 200)
+        self._bfo_win = RangeWidget(self._bfo_range, self.set_bfo, "Fine tuning", "counter_slider", float, QtCore.Qt.Horizontal)
+        self.top_grid_layout.addWidget(self._bfo_win, 4, 0, 1, 3)
+        for r in range(4, 5):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.qtgui_sink_x_0 = qtgui.sink_c(
             1024, #fftsize
             window.WIN_BLACKMAN_hARRIS, #wintype
@@ -112,44 +161,62 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.qtgui_sink_x_0.enable_rf_freq(False)
 
         self.top_layout.addWidget(self._qtgui_sink_x_0_win)
-        self.qtgui_edit_box_msg_0 = qtgui.edit_box_msg(qtgui.INT, '10000', 'Center Frequency [kHz]', False, True, 'frequency_kHz', None)
+        self.qtgui_edit_box_msg_0 = qtgui.edit_box_msg(qtgui.INT, '10000', 'Tune Frequency [kHz]', False, True, 'frequency_kHz', None)
         self._qtgui_edit_box_msg_0_win = sip.wrapinstance(self.qtgui_edit_box_msg_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_edit_box_msg_0_win)
-        self.epy_block_0 = epy_block_0.blk(serial_port="/dev/ttyACM0")
+        self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccf(1, firdes.low_pass(1,samp_rate,3000, 200), if_freq_kHz*1000, samp_rate)
+        self.epy_block_0 = epy_block_0.blk(serial_port="/dev/ttyACM1")
         self.blocks_selector_0_0 = blocks.selector(gr.sizeof_float*1,0 if phase < 0 else 1,0)
         self.blocks_selector_0_0.set_enabled(True)
         self.blocks_selector_0 = blocks.selector(gr.sizeof_float*1,0 if phase < 0 else 1,0)
         self.blocks_selector_0.set_enabled(True)
+        self.blocks_multiply_xx_0_0 = blocks.multiply_vff(1)
+        self.blocks_multiply_xx_0 = blocks.multiply_vff(1)
+        self.blocks_multiply_const_vxx_0_1 = blocks.multiply_const_ff(volume)
+        self.blocks_multiply_const_vxx_0_0_1 = blocks.multiply_const_ff(reverse)
         self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_ff(phase)
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_ff(phase)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_ff(-gain)
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
+        self.blocks_complex_to_float_0 = blocks.complex_to_float(1)
+        self.blocks_add_xx_0_1 = blocks.add_vff(1)
         self.blocks_add_xx_0_0 = blocks.add_vff(1)
         self.blocks_add_xx_0 = blocks.add_vff(1)
         self.audio_source_0 = audio.source(samp_rate, 'hw:0,0', True)
-        self._amp_range = Range(0, 0.2, 0.01, 0.1, 200)
-        self._amp_win = RangeWidget(self._amp_range, self.set_amp, "Amplitude", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._amp_win)
+        self.audio_sink_0_0 = audio.sink(48000, '', True)
+        self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, bfo, 1, 0, 0)
+        self.analog_sig_source_x_0 = analog.sig_source_f(samp_rate, analog.GR_COS_WAVE, bfo, 1, 0, 0)
 
 
         ##################################################
         # Connections
         ##################################################
         self.msg_connect((self.qtgui_edit_box_msg_0, 'msg'), (self.epy_block_0, 'frequencyPort'))
+        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))
+        self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_multiply_xx_0_0, 1))
         self.connect((self.audio_source_0, 1), (self.blocks_add_xx_0_0, 1))
         self.connect((self.audio_source_0, 0), (self.blocks_multiply_const_vxx_0, 0))
         self.connect((self.audio_source_0, 1), (self.blocks_multiply_const_vxx_0_0, 0))
         self.connect((self.audio_source_0, 1), (self.blocks_selector_0_0, 1))
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_selector_0, 1))
         self.connect((self.blocks_add_xx_0_0, 0), (self.blocks_selector_0_0, 0))
+        self.connect((self.blocks_add_xx_0_1, 0), (self.blocks_multiply_const_vxx_0_1, 0))
+        self.connect((self.blocks_complex_to_float_0, 0), (self.blocks_multiply_xx_0, 1))
+        self.connect((self.blocks_complex_to_float_0, 1), (self.blocks_multiply_xx_0_0, 0))
+        self.connect((self.blocks_float_to_complex_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))
         self.connect((self.blocks_float_to_complex_0, 0), (self.qtgui_sink_x_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_add_xx_0, 1))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_multiply_const_vxx_0_0_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_selector_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0_0_0, 0), (self.blocks_add_xx_0_0, 0))
+        self.connect((self.blocks_multiply_const_vxx_0_0_1, 0), (self.blocks_add_xx_0_1, 1))
+        self.connect((self.blocks_multiply_const_vxx_0_1, 0), (self.audio_sink_0_0, 0))
+        self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_add_xx_0_1, 0))
+        self.connect((self.blocks_multiply_xx_0_0, 0), (self.blocks_multiply_const_vxx_0_0_1, 0))
         self.connect((self.blocks_selector_0, 0), (self.blocks_float_to_complex_0, 0))
         self.connect((self.blocks_selector_0_0, 0), (self.blocks_float_to_complex_0, 1))
+        self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.blocks_complex_to_float_0, 0))
 
 
     def closeEvent(self, event):
@@ -160,12 +227,30 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
 
         event.accept()
 
+    def get_volume(self):
+        return self.volume
+
+    def set_volume(self, volume):
+        self.volume = volume
+        self.blocks_multiply_const_vxx_0_1.set_k(self.volume)
+
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
+        self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
+        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1,self.samp_rate,3000, 200))
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
+
+    def get_reverse(self):
+        return self.reverse
+
+    def set_reverse(self, reverse):
+        self.reverse = reverse
+        self._reverse_callback(self.reverse)
+        self.blocks_multiply_const_vxx_0_0_1.set_k(self.reverse)
 
     def get_phase(self):
         return self.phase
@@ -176,6 +261,13 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.blocks_multiply_const_vxx_0_0_0.set_k(self.phase)
         self.blocks_selector_0.set_input_index(0 if self.phase < 0 else 1)
         self.blocks_selector_0_0.set_input_index(0 if self.phase < 0 else 1)
+
+    def get_if_freq_kHz(self):
+        return self.if_freq_kHz
+
+    def set_if_freq_kHz(self, if_freq_kHz):
+        self.if_freq_kHz = if_freq_kHz
+        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.if_freq_kHz*1000)
 
     def get_gain(self):
         return self.gain
@@ -190,11 +282,13 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
     def set_freq(self, freq):
         self.freq = freq
 
-    def get_amp(self):
-        return self.amp
+    def get_bfo(self):
+        return self.bfo
 
-    def set_amp(self, amp):
-        self.amp = amp
+    def set_bfo(self, bfo):
+        self.bfo = bfo
+        self.analog_sig_source_x_0.set_frequency(self.bfo)
+        self.analog_sig_source_x_0_0.set_frequency(self.bfo)
 
 
 

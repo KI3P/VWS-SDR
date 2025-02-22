@@ -33,25 +33,25 @@ options:
     state: enabled
 
 blocks:
-- name: amp
+- name: bfo
   id: variable_qtgui_range
   parameters:
-    comment: ''
-    gui_hint: ''
-    label: Amplitude
+    comment: 4,0,1,3
+    gui_hint: 4,0,1,3
+    label: Fine tuning
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0'
-    step: '0.01'
-    stop: '0.2'
-    value: '0.1'
+    step: '10'
+    stop: '3000'
+    value: '1500'
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [336, 4.0]
+    coordinate: [1600, 764.0]
     rotation: 0
     state: true
 - name: freq
@@ -87,6 +87,18 @@ blocks:
     coordinate: [592, 12.0]
     rotation: 0
     state: true
+- name: if_freq_kHz
+  id: variable
+  parameters:
+    comment: ''
+    value: '6'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1216, 12.0]
+    rotation: 0
+    state: enabled
 - name: phase
   id: variable_qtgui_range
   parameters:
@@ -108,6 +120,36 @@ blocks:
     coordinate: [712, 12.0]
     rotation: 0
     state: true
+- name: reverse
+  id: variable_qtgui_chooser
+  parameters:
+    comment: 3,2,1,1
+    gui_hint: 3,2,1,1
+    label: Sideband
+    label0: Upper
+    label1: Lower
+    label2: BFO
+    label3: ''
+    label4: ''
+    labels: '[]'
+    num_opts: '3'
+    option0: '-1'
+    option1: '1'
+    option2: '0'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QHBoxLayout
+    type: raw
+    value: '-1'
+    widget: radio_buttons
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1744, 700.0]
+    rotation: 0
+    state: enabled
 - name: samp_rate
   id: variable
   parameters:
@@ -118,6 +160,88 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [16, 172.0]
+    rotation: 0
+    state: enabled
+- name: volume
+  id: variable_qtgui_range
+  parameters:
+    comment: 2,0,1,3
+    gui_hint: 2,0,1,3
+    label: Volume
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.05'
+    stop: '1.0'
+    value: '0.7'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1888, 724.0]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: bfo
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: float
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1232, 372.0]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: bfo
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: float
+    waveform: analog.GR_SIN_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1240, 660.0]
+    rotation: 0
+    state: enabled
+- name: audio_sink_0_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1832, 556.0]
     rotation: 0
     state: enabled
 - name: audio_source_0
@@ -173,6 +297,40 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [728, 304.0]
+    rotation: 0
+    state: true
+- name: blocks_add_xx_0_1
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1680, 440.0]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_float_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1264, 544.0]
     rotation: 0
     state: true
 - name: blocks_float_to_complex_0
@@ -245,6 +403,78 @@ blocks:
     coordinate: [520, 300.0]
     rotation: 0
     state: true
+- name: blocks_multiply_const_vxx_0_0_1
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: USB/LSB
+    const: reverse
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1604.0, 552]
+    rotation: 90
+    state: enabled
+- name: blocks_multiply_const_vxx_0_1
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Volume
+    const: volume
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1776, 444.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1480, 424.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_0_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1488, 680.0]
+    rotation: 0
+    state: enabled
 - name: blocks_selector_0
   id: blocks_selector
   parameters:
@@ -301,37 +531,59 @@ blocks:
       from gnuradio import gr\nimport pmt, serial\n\nclass blk(gr.sync_block):  #\
       \ other base classes are basic_block, decim_block, interp_block\n    \"\"\"\
       Embedded Python Block example - a simple multiply const\"\"\"\n\n    def __init__(self,\
-      \ serial_port='/dev/ttyACM0'):  # only default arguments here\n        \"\"\"\
-      arguments to this function show up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n\
+      \ serial_port=None):  # only default arguments here\n        \"\"\"arguments\
+      \ to this function show up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n\
       \            self,\n            name='Update tune frequency',   # will show\
       \ up in GRC\n            in_sig=[],\n            out_sig=[]\n        )\n   \
       \     self.serial_port = serial_port\n        self.frequencyPortName = 'frequencyPort'\n\
       \        self.message_port_register_in(pmt.intern(self.frequencyPortName))\n\
       \        self.set_msg_handler(pmt.intern(self.frequencyPortName), self.handle_msg)\n\
       \        self.new_center_freq = 10000\n        self.center_freq = 10000\n  \
-      \      self.serial = serial.Serial(self.serial_port,115200)\n        return\n\
-      \n    def handle_msg(self, msg):\n        self.new_center_freq = pmt.to_long(msg)\n\
-      \        if (self.new_center_freq != self.center_freq):\n            print(\"\
-      Updated frequency %d\"%self.new_center_freq)\n            self.serial.write(b'FR\
-      \ %d\\n'%(self.new_center_freq*1000))\n            self.center_freq = self.new_center_freq\n\
-      \        return\n\n    def work(self, input_items, output_items):\n        \"\
-      \"\"example: multiply with constant\"\"\"\n        if (self.new_center_freq\
-      \ != self.center_freq):\n            print(\"Updated frequency %d\"%self.new_center_freq)\n\
-      \            self.center_freq = self.new_center_freq\n        return \n"
+      \      self.IF_frequency_kHz = 6\n        if self.serial_port is not None:\n\
+      \            self.serial = serial.Serial(self.serial_port,115200)\n        return\n\
+      \n    def handle_msg(self, msg):\n        self.new_center_freq = pmt.to_long(msg)\
+      \ - self.IF_frequency_kHz\n        if (self.new_center_freq != self.center_freq):\n\
+      \            print(\"Updated frequency %d\"%self.new_center_freq)\n        \
+      \    self.serial.write(b'FR %d\\n'%(self.new_center_freq*1000))\n          \
+      \  self.center_freq = self.new_center_freq\n        return\n\n    def work(self,\
+      \ input_items, output_items):\n        \"\"\"example: multiply with constant\"\
+      \"\"\n        if (self.new_center_freq != self.center_freq):\n            print(\"\
+      Updated frequency %d\"%self.new_center_freq)\n            self.center_freq =\
+      \ self.new_center_freq\n        return \n"
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    serial_port: '"/dev/ttyACM0"'
+    serial_port: '"/dev/ttyACM1"'
   states:
-    _io_cache: ('Update tune frequency', 'blk', [('serial_port', "'/dev/ttyACM0'")],
-      [('frequencyPort', 'message', 1)], [], 'Embedded Python Block example - a simple
-      multiply const', ['serial_port'])
+    _io_cache: ('Update tune frequency', 'blk', [('serial_port', 'None')], [('frequencyPort',
+      'message', 1)], [], 'Embedded Python Block example - a simple multiply const',
+      ['serial_port'])
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1128, 76.0]
+    coordinate: [1168, 76.0]
+    rotation: 0
+    state: enabled
+- name: freq_xlating_fir_filter_xxx_0
+  id: freq_xlating_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    center_freq: if_freq_kHz*1000
+    comment: ''
+    decim: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    taps: firdes.low_pass(1,samp_rate,3000, 200)
+    type: ccf
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1000, 532.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -409,7 +661,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 484.0]
+    coordinate: [728, 604.0]
     rotation: 0
     state: true
 - name: note_1_0_0_1
@@ -422,7 +674,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 364.0]
+    coordinate: [728, 484.0]
     rotation: 0
     state: true
 - name: note_1_0_1
@@ -461,7 +713,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 412.0]
+    coordinate: [728, 532.0]
     rotation: 0
     state: true
 - name: note_1_1_0
@@ -500,7 +752,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 532.0]
+    coordinate: [728, 652.0]
     rotation: 0
     state: true
 - name: note_1_1_1_0_0
@@ -513,7 +765,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1136, 508.0]
+    coordinate: [640, 628.0]
     rotation: 0
     state: true
 - name: note_1_1_1_0_0_0
@@ -526,7 +778,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1136, 396.0]
+    coordinate: [640, 516.0]
     rotation: 0
     state: true
 - name: qtgui_edit_box_msg_0
@@ -539,7 +791,7 @@ blocks:
     is_pair: 'False'
     is_static: 'True'
     key: frequency_kHz
-    label: Center Frequency [kHz]
+    label: Tune Frequency [kHz]
     maxoutbuf: '0'
     minoutbuf: '0'
     type: int
@@ -577,25 +829,36 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1360, 220.0]
+    coordinate: [1448, 204.0]
     rotation: 0
     state: true
 
 connections:
+- [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
+- [analog_sig_source_x_0_0, '0', blocks_multiply_xx_0_0, '1']
 - [audio_source_0, '0', blocks_multiply_const_vxx_0, '0']
 - [audio_source_0, '1', blocks_add_xx_0_0, '1']
 - [audio_source_0, '1', blocks_multiply_const_vxx_0_0, '0']
 - [audio_source_0, '1', blocks_selector_0_0, '1']
 - [blocks_add_xx_0, '0', blocks_selector_0, '1']
 - [blocks_add_xx_0_0, '0', blocks_selector_0_0, '0']
+- [blocks_add_xx_0_1, '0', blocks_multiply_const_vxx_0_1, '0']
+- [blocks_complex_to_float_0, '0', blocks_multiply_xx_0, '1']
+- [blocks_complex_to_float_0, '1', blocks_multiply_xx_0_0, '0']
+- [blocks_float_to_complex_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 - [blocks_float_to_complex_0, '0', qtgui_sink_x_0, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_add_xx_0, '1']
 - [blocks_multiply_const_vxx_0, '0', blocks_multiply_const_vxx_0_0_0, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_selector_0, '0']
 - [blocks_multiply_const_vxx_0_0, '0', blocks_add_xx_0, '0']
 - [blocks_multiply_const_vxx_0_0_0, '0', blocks_add_xx_0_0, '0']
+- [blocks_multiply_const_vxx_0_0_1, '0', blocks_add_xx_0_1, '1']
+- [blocks_multiply_const_vxx_0_1, '0', audio_sink_0_0, '0']
+- [blocks_multiply_xx_0, '0', blocks_add_xx_0_1, '0']
+- [blocks_multiply_xx_0_0, '0', blocks_multiply_const_vxx_0_0_1, '0']
 - [blocks_selector_0, '0', blocks_float_to_complex_0, '0']
 - [blocks_selector_0_0, '0', blocks_float_to_complex_0, '1']
+- [freq_xlating_fir_filter_xxx_0, '0', blocks_complex_to_float_0, '0']
 - [qtgui_edit_box_msg_0, msg, epy_block_0, frequencyPort]
 
 metadata:
