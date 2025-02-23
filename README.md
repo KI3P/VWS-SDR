@@ -7,6 +7,8 @@ This repository contains the files for a 2025 project by the [Vienna Wireless So
 
 The VWS-SDR design draws heavily from the RF board of the T41-EP Software Defined Transceiver (SDT) originally designed by Al Peter-AC8GY and Jack Purdum-W8TEE. The T41-EP is a self-contain SDT that does not require an external PC, laptop, or tablet to use. Al and Jack wrote a book, available on [Amazon](https://www.amazon.com/dp/B0D25FV48C), describing the theory and operation of the T41-EP.
 
+![Photo of the VWS SDR](VWS_SDR_Rev1.jpg)
+
 ## Design overview 
 
 The VWS-SDR has stages shown in the block diagram below.
@@ -21,3 +23,19 @@ The VWS-SDR has stages shown in the block diagram below.
 ## Instructions
 
 Download this repository to your computer. Open the `KiCad\VWS-SDR-ref-design.kicad_pro` file using the [KiCad](https://www.kicad.org/) EDA software package. This repository includes a few custom symbols and footprints which should automatically be added to your library lists by KiCad.
+
+## Code
+
+### Pico
+
+The `code/pico_sketch` folder contains an Arduino sketch to program the Pico. The sketch listens for ASCII commands on the USB serial bus (baud 115200) that match this format:
+
+`FR 123456`
+
+where `123456` is the frequency in Hertz that the Si5351 should be tuned to.
+
+### Computer
+
+The `code/gnuradio_KI3P` contains a [gnuradio](https://wiki.gnuradio.org/index.php/InstallingGR) flowgraph to display the received signal and perform audio demodulation. It also allows you to adjust the gain and phase balance between the L and R channels to improve sideband separation if needed.
+
+![Screenshot of the gnuradio flowgraph](code/gnuradio_KI3P/flowgraph_screenshot.png)

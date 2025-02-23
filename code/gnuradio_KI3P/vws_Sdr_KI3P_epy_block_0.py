@@ -43,6 +43,5 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     def work(self, input_items, output_items):
         """example: multiply with constant"""
         if (self.new_center_freq != self.center_freq):
-            #print("Updated frequency %d"%self.new_center_freq)
             self.center_freq = self.new_center_freq
         return 

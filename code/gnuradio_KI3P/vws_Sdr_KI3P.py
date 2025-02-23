@@ -89,7 +89,6 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.phase = phase = 0
         self.if_freq_kHz = if_freq_kHz = 6
         self.gain = gain = 1
-        self.freq = freq = 48e3
         self.bfo = bfo = 1500
 
         ##################################################
@@ -134,7 +133,7 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self._phase_range = Range(-0.1, 0.1, 0.001, 0, 200)
         self._phase_win = RangeWidget(self._phase_range, self.set_phase, "'phase'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._phase_win)
-        self._gain_range = Range(0, 2, 0.001, 1, 200)
+        self._gain_range = Range(0.6, 1.4, 0.001, 1, 200)
         self._gain_win = RangeWidget(self._gain_range, self.set_gain, "'gain'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._gain_win)
         self._bfo_range = Range(0, 3000, 10, 1500, 200)
@@ -286,12 +285,6 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
     def set_gain(self, gain):
         self.gain = gain
         self.blocks_multiply_const_vxx_0.set_k(-self.gain)
-
-    def get_freq(self):
-        return self.freq
-
-    def set_freq(self, freq):
-        self.freq = freq
 
     def get_bfo(self):
         return self.bfo
