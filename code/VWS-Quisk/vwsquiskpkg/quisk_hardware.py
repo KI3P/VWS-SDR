@@ -28,11 +28,11 @@ import serial
 
 ## vws_name                   Serial port, text
 # The name of the VWS serial port to open.
-#vws_name = "/dev/ttyACM0"
+#vws_name = "com5"
 
 sample_rate = 48000
-channel_i = 1
-channel_q = 0
+channel_i = 0
+channel_q = 1
 correction = 630
 
 class Hardware(BaseHardware):
@@ -54,7 +54,7 @@ class Hardware(BaseHardware):
 
   def ChangeFrequency(self, tune, vfo, source='', band='', event=None):
     if vfo != self.vfo:
-      self.serial.write(b'FR %d\r'%(vfo+correction))
+      self.serial.write(b'FR %d\n'%(vfo+correction))
       self.vfo = vfo
     self.tune = tune
     return [self.tune, self.vfo]
@@ -67,3 +67,15 @@ class Hardware(BaseHardware):
   
   def PollGuiControl(self):
     pass
+
+  #
+  # On PTT Button press send value to send TX command 
+  # TX 1 = PTT on
+  # TX 2 = PTT off
+  #
+  def OnButtonPTT(self, event):
+    btn = event.GetEventObject()
+    self.serial.write(b'TX %d\n'%(btn.GetValue()))
+  #  print ('TX %d'%(btn.GetValue()))
+
+  

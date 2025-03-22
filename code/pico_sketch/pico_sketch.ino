@@ -2,9 +2,10 @@
  * Credit to the T41 project (https://github.com/KI3P/T41-V12-SDT) for the code that 
  * controls the Si5351.
  *
- * Oliver KI3P, February 2025
+ * Oliver KI3P, March 2025
  */
 
+#include <Ticker.h>
 #include "si5351.h"
 
 #define SI5351_LOAD_CAPACITANCE SI5351_CRYSTAL_LOAD_8PF
@@ -15,6 +16,7 @@
 #define SCL 1
 #define FREQ_MIN_HZ 100000
 #define FREQ_MAX_HZ 200000000
+#define LED_PIN 16
 
 Si5351 si5351;
 long centerFreq;
@@ -27,6 +29,13 @@ long long pll_freq;
 long long freq;
 bool LED_state;
 char strBufRes[100];
+
+Ticker toggler;
+const float togglePeriod = 1;  //seconds
+
+void toggle() {
+  digitalWrite(LED_PIN, !digitalRead(LED_PIN));
+}
 
 int EvenDivisor(long freq2) {
   // next 6 ifs added by DRM VK3KQT for use by a phase method of time delay described by
@@ -187,6 +196,9 @@ void scanner() {
 void setup() {
   Serial.begin(115200);
   delay(500);
+
+  pinMode(LED_BUILTIN, OUTPUT); // Set LED_BUILTIN as an output pin
+
   Wire.setSDA(SDA);
   Wire.setSCL(SCL);
 
@@ -203,6 +215,10 @@ void setup() {
   IFFreq = 0;
   centerFreq = 10000000;
   SetFreq();
+
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);  // make sure LED is off on start
+  toggler.attach(togglePeriod, toggle);
 }
 
 int read_input(String *command, int *value){
@@ -246,6 +262,8 @@ void loop() {
         sprintf(strBufRes,"Frequency %d outside of valid range %d to %d!\n",value,FREQ_MIN_HZ,FREQ_MAX_HZ);
         Serial.print(strBufRes);
       }
+    } else if (command == "TX") {
+        digitalWrite(LED_BUILTIN, value); // Toggle LED
     } else {
       Serial.print("Unrecognized command: ");
       Serial.println(command);

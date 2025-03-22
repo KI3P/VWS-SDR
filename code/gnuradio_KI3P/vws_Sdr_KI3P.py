@@ -29,18 +29,21 @@ import sip
 from gnuradio import analog
 from gnuradio import audio
 from gnuradio import blocks
+from gnuradio import fft
+from gnuradio.fft import window
 from gnuradio import filter
 from gnuradio import gr
-from gnuradio.fft import window
 import sys
 import signal
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
+from gnuradio import iqbalance
 from gnuradio.qtgui import Range, RangeWidget
 from PyQt5 import QtCore
 import numpy as np
 import vws_Sdr_KI3P_epy_block_0 as epy_block_0  # embedded python block
+import vws_Sdr_KI3P_epy_block_0_0 as epy_block_0_0  # embedded python block
 
 
 
@@ -82,19 +85,20 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.volume = volume = 0.7
+        self.volume = volume = 10
         self.tune_freq_kHz = tune_freq_kHz = 10000
         self.samp_rate = samp_rate = 48000
         self.reverse = reverse = -1
         self.phase = phase = 0
         self.if_freq_kHz = if_freq_kHz = 6
-        self.gain = gain = 1
+        self.gain = gain = 0
+        self.fft_len = fft_len = 2048
         self.bfo = bfo = 1500
 
         ##################################################
         # Blocks
         ##################################################
-        self._volume_range = Range(0, 1.0, 0.05, 0.7, 200)
+        self._volume_range = Range(0, 50, 1, 10, 200)
         self._volume_win = RangeWidget(self._volume_range, self.set_volume, "Volume", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_grid_layout.addWidget(self._volume_win, 2, 0, 1, 3)
         for r in range(2, 3):
@@ -133,7 +137,7 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self._phase_range = Range(-0.1, 0.1, 0.001, 0, 200)
         self._phase_win = RangeWidget(self._phase_range, self.set_phase, "'phase'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._phase_win)
-        self._gain_range = Range(0.6, 1.4, 0.001, 1, 200)
+        self._gain_range = Range(-0.5, 0.5, 0.01, 0, 200)
         self._gain_win = RangeWidget(self._gain_range, self.set_gain, "'gain'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._gain_win)
         self._bfo_range = Range(0, 3000, 10, 1500, 200)
@@ -161,29 +165,93 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.qtgui_sink_x_0.enable_rf_freq(True)
 
         self.top_layout.addWidget(self._qtgui_sink_x_0_win)
+        self.qtgui_number_sink_0_0_0 = qtgui.number_sink(
+            gr.sizeof_float,
+            1,
+            qtgui.NUM_GRAPH_NONE,
+            1,
+            None # parent
+        )
+        self.qtgui_number_sink_0_0_0.set_update_time(0.1)
+        self.qtgui_number_sink_0_0_0.set_title("Noise floor [dBm]")
+
+        labels = ['', '', '', '', '',
+            '', '', '', '', '']
+        units = ['', '', '', '', '',
+            '', '', '', '', '']
+        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
+            ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
+        factor = [1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1]
+
+        for i in range(1):
+            self.qtgui_number_sink_0_0_0.set_min(i, -1)
+            self.qtgui_number_sink_0_0_0.set_max(i, 1)
+            self.qtgui_number_sink_0_0_0.set_color(i, colors[i][0], colors[i][1])
+            if len(labels[i]) == 0:
+                self.qtgui_number_sink_0_0_0.set_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_number_sink_0_0_0.set_label(i, labels[i])
+            self.qtgui_number_sink_0_0_0.set_unit(i, units[i])
+            self.qtgui_number_sink_0_0_0.set_factor(i, factor[i])
+
+        self.qtgui_number_sink_0_0_0.enable_autoscale(False)
+        self._qtgui_number_sink_0_0_0_win = sip.wrapinstance(self.qtgui_number_sink_0_0_0.qwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_number_sink_0_0_0_win)
+        self.qtgui_number_sink_0_0 = qtgui.number_sink(
+            gr.sizeof_float,
+            1,
+            qtgui.NUM_GRAPH_NONE,
+            1,
+            None # parent
+        )
+        self.qtgui_number_sink_0_0.set_update_time(0.1)
+        self.qtgui_number_sink_0_0.set_title("SNR [dB]")
+
+        labels = ['', '', '', '', '',
+            '', '', '', '', '']
+        units = ['', '', '', '', '',
+            '', '', '', '', '']
+        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
+            ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
+        factor = [1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1]
+
+        for i in range(1):
+            self.qtgui_number_sink_0_0.set_min(i, -1)
+            self.qtgui_number_sink_0_0.set_max(i, 1)
+            self.qtgui_number_sink_0_0.set_color(i, colors[i][0], colors[i][1])
+            if len(labels[i]) == 0:
+                self.qtgui_number_sink_0_0.set_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_number_sink_0_0.set_label(i, labels[i])
+            self.qtgui_number_sink_0_0.set_unit(i, units[i])
+            self.qtgui_number_sink_0_0.set_factor(i, factor[i])
+
+        self.qtgui_number_sink_0_0.enable_autoscale(False)
+        self._qtgui_number_sink_0_0_win = sip.wrapinstance(self.qtgui_number_sink_0_0.qwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_number_sink_0_0_win)
         self.qtgui_edit_box_msg_0 = qtgui.edit_box_msg(qtgui.INT, '10000', 'Tune Frequency [kHz]', True, True, 'frequency_kHz', None)
         self._qtgui_edit_box_msg_0_win = sip.wrapinstance(self.qtgui_edit_box_msg_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_edit_box_msg_0_win)
+        self.iqbalance_fix_cc_0 = iqbalance.fix_cc(gain, phase)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccf(1, firdes.low_pass(1,samp_rate,3000, 200), if_freq_kHz*1000, samp_rate)
+        self.fft_vxx_0 = fft.fft_vcc(fft_len, True, window.blackmanharris(fft_len), True, 1)
+        self.epy_block_0_0 = epy_block_0_0.blk(vectorSize=fft_len)
         self.epy_block_0 = epy_block_0.blk(serial_port="/dev/ttyACM0")
-        self.blocks_selector_0_0 = blocks.selector(gr.sizeof_float*1,0 if phase < 0 else 1,0)
-        self.blocks_selector_0_0.set_enabled(True)
-        self.blocks_selector_0 = blocks.selector(gr.sizeof_float*1,0 if phase < 0 else 1,0)
-        self.blocks_selector_0.set_enabled(True)
+        self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, fft_len)
         self.blocks_multiply_xx_0_0 = blocks.multiply_vff(1)
         self.blocks_multiply_xx_0 = blocks.multiply_vff(1)
         self.blocks_multiply_const_vxx_0_1 = blocks.multiply_const_ff(volume)
         self.blocks_multiply_const_vxx_0_0_1 = blocks.multiply_const_ff(reverse)
-        self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_ff(phase)
-        self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_ff(phase)
-        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_ff(-gain)
         self.blocks_msgpair_to_var_0 = blocks.msg_pair_to_var(self.set_tune_freq_kHz)
-        self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
+        self.blocks_moving_average_xx_0_0 = blocks.moving_average_ff(10, 1/10, 4000, 1)
+        self.blocks_moving_average_xx_0 = blocks.moving_average_ff(10, 1/10, 4000, 1)
+        self.blocks_float_to_complex_0_0 = blocks.float_to_complex(1)
+        self.blocks_complex_to_mag_squared_0 = blocks.complex_to_mag_squared(fft_len)
         self.blocks_complex_to_float_0 = blocks.complex_to_float(1)
         self.blocks_add_xx_0_1 = blocks.add_vff(1)
-        self.blocks_add_xx_0_0 = blocks.add_vff(1)
-        self.blocks_add_xx_0 = blocks.add_vff(1)
-        self.audio_source_0 = audio.source(samp_rate, 'hw:0,0', True)
+        self.audio_source_0 = audio.source(samp_rate, 'hw:1,0', True)
         self.audio_sink_0_0 = audio.sink(48000, '', True)
         self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, bfo, 1, 0, 0)
         self.analog_sig_source_x_0 = analog.sig_source_f(samp_rate, analog.GR_COS_WAVE, bfo, 1, 0, 0)
@@ -196,29 +264,27 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.msg_connect((self.qtgui_edit_box_msg_0, 'msg'), (self.epy_block_0, 'frequencyPort'))
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))
         self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_multiply_xx_0_0, 1))
-        self.connect((self.audio_source_0, 1), (self.blocks_add_xx_0_0, 1))
-        self.connect((self.audio_source_0, 0), (self.blocks_multiply_const_vxx_0, 0))
-        self.connect((self.audio_source_0, 1), (self.blocks_multiply_const_vxx_0_0, 0))
-        self.connect((self.audio_source_0, 1), (self.blocks_selector_0_0, 1))
-        self.connect((self.blocks_add_xx_0, 0), (self.blocks_selector_0, 1))
-        self.connect((self.blocks_add_xx_0_0, 0), (self.blocks_selector_0_0, 0))
+        self.connect((self.audio_source_0, 1), (self.blocks_float_to_complex_0_0, 0))
+        self.connect((self.audio_source_0, 0), (self.blocks_float_to_complex_0_0, 1))
         self.connect((self.blocks_add_xx_0_1, 0), (self.blocks_multiply_const_vxx_0_1, 0))
         self.connect((self.blocks_complex_to_float_0, 0), (self.blocks_multiply_xx_0, 1))
         self.connect((self.blocks_complex_to_float_0, 1), (self.blocks_multiply_xx_0_0, 0))
-        self.connect((self.blocks_float_to_complex_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))
-        self.connect((self.blocks_float_to_complex_0, 0), (self.qtgui_sink_x_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_add_xx_0, 1))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_multiply_const_vxx_0_0_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_selector_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_add_xx_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0_0_0, 0), (self.blocks_add_xx_0_0, 0))
+        self.connect((self.blocks_complex_to_mag_squared_0, 0), (self.epy_block_0_0, 0))
+        self.connect((self.blocks_float_to_complex_0_0, 0), (self.iqbalance_fix_cc_0, 0))
+        self.connect((self.blocks_moving_average_xx_0, 0), (self.qtgui_number_sink_0_0, 0))
+        self.connect((self.blocks_moving_average_xx_0_0, 0), (self.qtgui_number_sink_0_0_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0_0_1, 0), (self.blocks_add_xx_0_1, 1))
         self.connect((self.blocks_multiply_const_vxx_0_1, 0), (self.audio_sink_0_0, 0))
         self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_add_xx_0_1, 0))
         self.connect((self.blocks_multiply_xx_0_0, 0), (self.blocks_multiply_const_vxx_0_0_1, 0))
-        self.connect((self.blocks_selector_0, 0), (self.blocks_float_to_complex_0, 0))
-        self.connect((self.blocks_selector_0_0, 0), (self.blocks_float_to_complex_0, 1))
+        self.connect((self.blocks_stream_to_vector_0, 0), (self.fft_vxx_0, 0))
+        self.connect((self.epy_block_0_0, 0), (self.blocks_moving_average_xx_0, 0))
+        self.connect((self.epy_block_0_0, 1), (self.blocks_moving_average_xx_0_0, 0))
+        self.connect((self.fft_vxx_0, 0), (self.blocks_complex_to_mag_squared_0, 0))
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.blocks_complex_to_float_0, 0))
+        self.connect((self.iqbalance_fix_cc_0, 0), (self.blocks_stream_to_vector_0, 0))
+        self.connect((self.iqbalance_fix_cc_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))
+        self.connect((self.iqbalance_fix_cc_0, 0), (self.qtgui_sink_x_0, 0))
 
 
     def closeEvent(self, event):
@@ -266,10 +332,7 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
 
     def set_phase(self, phase):
         self.phase = phase
-        self.blocks_multiply_const_vxx_0_0.set_k(self.phase)
-        self.blocks_multiply_const_vxx_0_0_0.set_k(self.phase)
-        self.blocks_selector_0.set_input_index(0 if self.phase < 0 else 1)
-        self.blocks_selector_0_0.set_input_index(0 if self.phase < 0 else 1)
+        self.iqbalance_fix_cc_0.set_phase(self.phase)
 
     def get_if_freq_kHz(self):
         return self.if_freq_kHz
@@ -284,7 +347,13 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
 
     def set_gain(self, gain):
         self.gain = gain
-        self.blocks_multiply_const_vxx_0.set_k(-self.gain)
+        self.iqbalance_fix_cc_0.set_mag(self.gain)
+
+    def get_fft_len(self):
+        return self.fft_len
+
+    def set_fft_len(self, fft_len):
+        self.fft_len = fft_len
 
     def get_bfo(self):
         return self.bfo
