@@ -194,11 +194,11 @@ void scanner() {
 }
 
 void setup() {
+  pinMode(LED_BUILTIN, OUTPUT); // Set LED_BUILTIN as an output pin
+  digitalWrite(LED_BUILTIN, HIGH);
+
   Serial.begin(115200);
   delay(500);
-
-  pinMode(LED_BUILTIN, OUTPUT); // Set LED_BUILTIN as an output pin
-
   Wire.setSDA(SDA);
   Wire.setSCL(SCL);
 
@@ -219,6 +219,7 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, LOW);  // make sure LED is off on start
   toggler.attach(togglePeriod, toggle);
+  digitalWrite(LED_BUILTIN, LOW);
 }
 
 int read_input(String *command, int *value){
