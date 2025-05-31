@@ -33,7 +33,8 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         return
 
     def handle_msg(self, msg):
-        self.new_center_freq = pmt.to_long(pmt.cdr(msg)) - self.IF_frequency_kHz
+        #self.new_center_freq = pmt.to_long(pmt.cdr(msg)) - self.IF_frequency_kHz
+        self.new_center_freq = pmt.to_float(pmt.cdr(msg)) - self.IF_frequency_kHz
         if (self.new_center_freq != self.center_freq):
             print("Updated frequency %d"%self.new_center_freq)
             self.serial.write(b'FR %d\n'%(self.new_center_freq*1000))

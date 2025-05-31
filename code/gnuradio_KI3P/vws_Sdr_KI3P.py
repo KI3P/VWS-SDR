@@ -85,25 +85,26 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.volume = volume = 10
-        self.tune_freq_kHz = tune_freq_kHz = 10000
         self.samp_rate = samp_rate = 48000
+        self.volume = volume = 1.5
+        self.tune_freq_kHz = tune_freq_kHz = 10000
         self.reverse = reverse = -1
         self.phase = phase = 0
         self.if_freq_kHz = if_freq_kHz = 6
         self.gain = gain = 0
         self.fft_len = fft_len = 2048
-        self.bfo = bfo = 1500
+        self.bfo = bfo = 0
+        self.audio_lowpass = audio_lowpass = firdes.low_pass(1.0, samp_rate, 2700,100, window.WIN_HAMMING, 6.76)
 
         ##################################################
         # Blocks
         ##################################################
-        self._volume_range = Range(0, 50, 1, 10, 200)
+        self._volume_range = Range(0, 50, 0.5, 1.5, 200)
         self._volume_win = RangeWidget(self._volume_range, self.set_volume, "Volume", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_grid_layout.addWidget(self._volume_win, 2, 0, 1, 3)
+        self.top_grid_layout.addWidget(self._volume_win, 2, 1, 1, 2)
         for r in range(2, 3):
             self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 3):
+        for c in range(1, 3):
             self.top_grid_layout.setColumnStretch(c, 1)
         # Create the options list
         self._reverse_options = [-1, 1, 0]
@@ -129,21 +130,51 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self._reverse_callback(self.reverse)
         self._reverse_button_group.buttonClicked[int].connect(
             lambda i: self.set_reverse(self._reverse_options[i]))
-        self.top_grid_layout.addWidget(self._reverse_group_box, 3, 2, 1, 1)
-        for r in range(3, 4):
+        self.top_grid_layout.addWidget(self._reverse_group_box, 2, 0, 1, 1)
+        for r in range(2, 3):
             self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(2, 3):
+        for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
         self._phase_range = Range(-0.1, 0.1, 0.001, 0, 200)
         self._phase_win = RangeWidget(self._phase_range, self.set_phase, "'phase'", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._phase_win)
+        self.top_grid_layout.addWidget(self._phase_win, 4, 0, 1, 3)
+        for r in range(4, 5):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self._gain_range = Range(-0.5, 0.5, 0.01, 0, 200)
         self._gain_win = RangeWidget(self._gain_range, self.set_gain, "'gain'", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._gain_win)
-        self._bfo_range = Range(0, 3000, 10, 1500, 200)
+        self.top_grid_layout.addWidget(self._gain_win, 5, 0, 1, 3)
+        for r in range(5, 6):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
+        self._bfo_range = Range(-3000, 3000, 1, 0, 200)
         self._bfo_win = RangeWidget(self._bfo_range, self.set_bfo, "Fine tuning", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_grid_layout.addWidget(self._bfo_win, 4, 0, 1, 3)
-        for r in range(4, 5):
+        self.top_grid_layout.addWidget(self._bfo_win, 1, 1, 1, 2)
+        for r in range(1, 2):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(1, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
+        self.qtgui_sink_x_0_0 = qtgui.sink_f(
+            1024, #fftsize
+            window.WIN_BLACKMAN_hARRIS, #wintype
+            0, #fc
+            samp_rate/8, #bw
+            "Demodulated Audio Signal Display", #name
+            True, #plotfreq
+            True, #plotwaterfall
+            True, #plottime
+            False, #plotconst
+            None # parent
+        )
+        self.qtgui_sink_x_0_0.set_update_time(1.0/10)
+        self._qtgui_sink_x_0_0_win = sip.wrapinstance(self.qtgui_sink_x_0_0.qwidget(), Qt.QWidget)
+
+        self.qtgui_sink_x_0_0.enable_rf_freq(False)
+
+        self.top_grid_layout.addWidget(self._qtgui_sink_x_0_0_win, 3, 0, 1, 3)
+        for r in range(3, 4):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 3):
             self.top_grid_layout.setColumnStretch(c, 1)
@@ -152,11 +183,11 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
             window.WIN_BLACKMAN_hARRIS, #wintype
             (tune_freq_kHz-if_freq_kHz)*1000, #fc
             samp_rate, #bw
-            "", #name
+            "RF Signal Display", #name
             True, #plotfreq
             True, #plotwaterfall
             True, #plottime
-            True, #plotconst
+            False, #plotconst
             None # parent
         )
         self.qtgui_sink_x_0.set_update_time(1.0/10)
@@ -164,7 +195,11 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
 
         self.qtgui_sink_x_0.enable_rf_freq(True)
 
-        self.top_layout.addWidget(self._qtgui_sink_x_0_win)
+        self.top_grid_layout.addWidget(self._qtgui_sink_x_0_win, 0, 0, 1, 3)
+        for r in range(0, 1):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.qtgui_number_sink_0_0_0 = qtgui.number_sink(
             gr.sizeof_float,
             1,
@@ -197,7 +232,11 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
 
         self.qtgui_number_sink_0_0_0.enable_autoscale(False)
         self._qtgui_number_sink_0_0_0_win = sip.wrapinstance(self.qtgui_number_sink_0_0_0.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_0_0_0_win)
+        self.top_grid_layout.addWidget(self._qtgui_number_sink_0_0_0_win, 6, 1, 1, 1)
+        for r in range(6, 7):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(1, 2):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.qtgui_number_sink_0_0 = qtgui.number_sink(
             gr.sizeof_float,
             1,
@@ -230,12 +269,22 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
 
         self.qtgui_number_sink_0_0.enable_autoscale(False)
         self._qtgui_number_sink_0_0_win = sip.wrapinstance(self.qtgui_number_sink_0_0.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_0_0_win)
-        self.qtgui_edit_box_msg_0 = qtgui.edit_box_msg(qtgui.INT, '10000', 'Tune Frequency [kHz]', True, True, 'frequency_kHz', None)
+        self.top_grid_layout.addWidget(self._qtgui_number_sink_0_0_win, 6, 0, 1, 1)
+        for r in range(6, 7):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.top_grid_layout.setColumnStretch(c, 1)
+        self.qtgui_edit_box_msg_0 = qtgui.edit_box_msg(qtgui.FLOAT, '10000', 'Tune Frequency [kHz]', True, True, 'frequency_kHz', None)
         self._qtgui_edit_box_msg_0_win = sip.wrapinstance(self.qtgui_edit_box_msg_0.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_edit_box_msg_0_win)
+        self.top_grid_layout.addWidget(self._qtgui_edit_box_msg_0_win, 1, 0, 1, 1)
+        for r in range(1, 2):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.iqbalance_fix_cc_0 = iqbalance.fix_cc(gain, phase)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccf(1, firdes.low_pass(1,samp_rate,3000, 200), if_freq_kHz*1000, samp_rate)
+        self.fir_filter_xxx_0 = filter.fir_filter_fff(8, audio_lowpass)
+        self.fir_filter_xxx_0.declare_sample_delay(0)
         self.fft_vxx_0 = fft.fft_vcc(fft_len, True, window.blackmanharris(fft_len), True, 1)
         self.epy_block_0_0 = epy_block_0_0.blk(vectorSize=fft_len)
         self.epy_block_0 = epy_block_0.blk(serial_port="/dev/ttyACM0")
@@ -251,7 +300,7 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.blocks_complex_to_mag_squared_0 = blocks.complex_to_mag_squared(fft_len)
         self.blocks_complex_to_float_0 = blocks.complex_to_float(1)
         self.blocks_add_xx_0_1 = blocks.add_vff(1)
-        self.audio_source_0 = audio.source(samp_rate, 'hw:1,0', True)
+        self.audio_source_0 = audio.source(samp_rate, 'hw:0,0', True)
         self.audio_sink_0_0 = audio.sink(48000, '', True)
         self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, bfo, 1, 0, 0)
         self.analog_sig_source_x_0 = analog.sig_source_f(samp_rate, analog.GR_COS_WAVE, bfo, 1, 0, 0)
@@ -264,8 +313,8 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.msg_connect((self.qtgui_edit_box_msg_0, 'msg'), (self.epy_block_0, 'frequencyPort'))
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))
         self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_multiply_xx_0_0, 1))
-        self.connect((self.audio_source_0, 1), (self.blocks_float_to_complex_0_0, 0))
         self.connect((self.audio_source_0, 0), (self.blocks_float_to_complex_0_0, 1))
+        self.connect((self.audio_source_0, 1), (self.blocks_float_to_complex_0_0, 0))
         self.connect((self.blocks_add_xx_0_1, 0), (self.blocks_multiply_const_vxx_0_1, 0))
         self.connect((self.blocks_complex_to_float_0, 0), (self.blocks_multiply_xx_0, 1))
         self.connect((self.blocks_complex_to_float_0, 1), (self.blocks_multiply_xx_0_0, 0))
@@ -275,12 +324,14 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_moving_average_xx_0_0, 0), (self.qtgui_number_sink_0_0_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0_0_1, 0), (self.blocks_add_xx_0_1, 1))
         self.connect((self.blocks_multiply_const_vxx_0_1, 0), (self.audio_sink_0_0, 0))
+        self.connect((self.blocks_multiply_const_vxx_0_1, 0), (self.fir_filter_xxx_0, 0))
         self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_add_xx_0_1, 0))
         self.connect((self.blocks_multiply_xx_0_0, 0), (self.blocks_multiply_const_vxx_0_0_1, 0))
         self.connect((self.blocks_stream_to_vector_0, 0), (self.fft_vxx_0, 0))
         self.connect((self.epy_block_0_0, 0), (self.blocks_moving_average_xx_0, 0))
         self.connect((self.epy_block_0_0, 1), (self.blocks_moving_average_xx_0_0, 0))
         self.connect((self.fft_vxx_0, 0), (self.blocks_complex_to_mag_squared_0, 0))
+        self.connect((self.fir_filter_xxx_0, 0), (self.qtgui_sink_x_0_0, 0))
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.blocks_complex_to_float_0, 0))
         self.connect((self.iqbalance_fix_cc_0, 0), (self.blocks_stream_to_vector_0, 0))
         self.connect((self.iqbalance_fix_cc_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))
@@ -295,6 +346,18 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
 
         event.accept()
 
+    def get_samp_rate(self):
+        return self.samp_rate
+
+    def set_samp_rate(self, samp_rate):
+        self.samp_rate = samp_rate
+        self.set_audio_lowpass(firdes.low_pass(1.0, self.samp_rate, 2700, 100, window.WIN_HAMMING, 6.76))
+        self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
+        self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
+        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1,self.samp_rate,3000, 200))
+        self.qtgui_sink_x_0.set_frequency_range((self.tune_freq_kHz-self.if_freq_kHz)*1000, self.samp_rate)
+        self.qtgui_sink_x_0_0.set_frequency_range(0, self.samp_rate/8)
+
     def get_volume(self):
         return self.volume
 
@@ -307,16 +370,6 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
 
     def set_tune_freq_kHz(self, tune_freq_kHz):
         self.tune_freq_kHz = tune_freq_kHz
-        self.qtgui_sink_x_0.set_frequency_range((self.tune_freq_kHz-self.if_freq_kHz)*1000, self.samp_rate)
-
-    def get_samp_rate(self):
-        return self.samp_rate
-
-    def set_samp_rate(self, samp_rate):
-        self.samp_rate = samp_rate
-        self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
-        self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
-        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1,self.samp_rate,3000, 200))
         self.qtgui_sink_x_0.set_frequency_range((self.tune_freq_kHz-self.if_freq_kHz)*1000, self.samp_rate)
 
     def get_reverse(self):
@@ -362,6 +415,13 @@ class vws_Sdr_KI3P(gr.top_block, Qt.QWidget):
         self.bfo = bfo
         self.analog_sig_source_x_0.set_frequency(self.bfo)
         self.analog_sig_source_x_0_0.set_frequency(self.bfo)
+
+    def get_audio_lowpass(self):
+        return self.audio_lowpass
+
+    def set_audio_lowpass(self, audio_lowpass):
+        self.audio_lowpass = audio_lowpass
+        self.fir_filter_xxx_0.set_taps(self.audio_lowpass)
 
 
 

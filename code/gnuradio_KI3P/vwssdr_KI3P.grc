@@ -33,25 +33,42 @@ options:
     state: enabled
 
 blocks:
+- name: audio_lowpass
+  id: variable_low_pass_filter_taps
+  parameters:
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: '2700'
+    gain: '1.0'
+    samp_rate: samp_rate
+    width: '100'
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1752, 116.0]
+    rotation: 0
+    state: true
 - name: bfo
   id: variable_qtgui_range
   parameters:
-    comment: 4,0,1,3
-    gui_hint: 4,0,1,3
+    comment: Adjust the fine tune frequency
+    gui_hint: 1,1,1,2
     label: Fine tuning
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
-    start: '0'
-    step: '10'
+    start: '-3000'
+    step: '1'
     stop: '3000'
-    value: '1500'
+    value: '0'
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1376, 580.0]
+    coordinate: [1376, 596.0]
     rotation: 0
     state: true
 - name: fft_len
@@ -69,8 +86,8 @@ blocks:
 - name: gain
   id: variable_qtgui_range
   parameters:
-    comment: ''
-    gui_hint: ''
+    comment: Adjust the I/Q gain balance
+    gui_hint: 5,0,1,3
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -84,7 +101,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [192, 12.0]
+    coordinate: [328, 20.0]
     rotation: 0
     state: true
 - name: if_freq_kHz
@@ -102,8 +119,8 @@ blocks:
 - name: phase
   id: variable_qtgui_range
   parameters:
-    comment: ''
-    gui_hint: ''
+    comment: Adjust the I/Q phase balance
+    gui_hint: 4,0,1,3
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -117,14 +134,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 12.0]
+    coordinate: [496, 20.0]
     rotation: 0
     state: true
 - name: reverse
   id: variable_qtgui_chooser
   parameters:
-    comment: 3,2,1,1
-    gui_hint: 3,2,1,1
+    comment: ''
+    gui_hint: 2,0,1,1
     label: Sideband
     label0: Upper
     label1: Lower
@@ -147,7 +164,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1520, 516.0]
+    coordinate: [1488, 532.0]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -177,22 +194,22 @@ blocks:
 - name: volume
   id: variable_qtgui_range
   parameters:
-    comment: 2,0,1,3
-    gui_hint: 2,0,1,3
+    comment: ''
+    gui_hint: 2,1,1,2
     label: Volume
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0'
-    step: '1'
+    step: '0.5'
     stop: '50'
-    value: '10'
+    value: '1.5'
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1664, 540.0]
+    coordinate: [1608, 596.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -253,7 +270,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1608, 372.0]
+    coordinate: [1760, 356.0]
     rotation: 0
     state: enabled
 - name: audio_source_0
@@ -261,8 +278,8 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: "In linux, use \"aplay -l\" to get \nthe sound card hardware address"
-    device_name: hw:1,0
+    comment: "In linux, use \"arecord -l\" to get \nthe sound card hardware address"
+    device_name: hw:0,0
     maxoutbuf: '0'
     minoutbuf: '0'
     num_outputs: '2'
@@ -322,7 +339,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [272, 596.0]
+    coordinate: [264, 676.0]
     rotation: 0
     state: true
 - name: blocks_float_to_complex_0_0
@@ -482,7 +499,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 400.0]
+    coordinate: [296, 504.0]
     rotation: 0
     state: enabled
 - name: epy_block_0
@@ -505,7 +522,8 @@ blocks:
       \        self.new_center_freq = 10000\n        self.center_freq = 10000\n  \
       \      self.IF_frequency_kHz = 6\n        if self.serial_port is not None:\n\
       \            self.serial = serial.Serial(self.serial_port,115200)\n        return\n\
-      \n    def handle_msg(self, msg):\n        self.new_center_freq = pmt.to_long(pmt.cdr(msg))\
+      \n    def handle_msg(self, msg):\n        #self.new_center_freq = pmt.to_long(pmt.cdr(msg))\
+      \ - self.IF_frequency_kHz\n        self.new_center_freq = pmt.to_float(pmt.cdr(msg))\
       \ - self.IF_frequency_kHz\n        if (self.new_center_freq != self.center_freq):\n\
       \            print(\"Updated frequency %d\"%self.new_center_freq)\n        \
       \    self.serial.write(b'FR %d\\n'%(self.new_center_freq*1000))\n          \
@@ -526,7 +544,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1360, 76.0]
+    coordinate: [1328, 76.0]
     rotation: 0
     state: enabled
 - name: epy_block_0_0
@@ -558,7 +576,8 @@ blocks:
       \ len(output_items[0])\n"
     affinity: ''
     alias: ''
-    comment: ''
+    comment: "Calculate the amplitude of the \nlargest tone and the noise floor \n\
+      on either side of it"
     maxoutbuf: '0'
     minoutbuf: '0'
     vectorSize: fft_len
@@ -569,7 +588,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [288, 664.0]
+    coordinate: [288, 728.0]
     rotation: 0
     state: enabled
 - name: fft_vxx_0
@@ -590,9 +609,28 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 460.0]
+    coordinate: [256, 556.0]
     rotation: 0
     state: enabled
+- name: fir_filter_xxx_0
+  id: fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: audio_lowpass
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1760, 260.0]
+    rotation: 0
+    state: true
 - name: freq_xlating_fir_filter_xxx_0
   id: freq_xlating_fir_filter_xxx
   parameters:
@@ -651,14 +689,14 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    gui_hint: ''
+    gui_hint: 1,0,1,1
     is_pair: 'True'
     is_static: 'True'
     key: frequency_kHz
     label: Tune Frequency [kHz]
     maxoutbuf: '0'
     minoutbuf: '0'
-    type: int
+    type: float
     value: '10000'
   states:
     bus_sink: false
@@ -696,7 +734,7 @@ blocks:
     factor8: '1'
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_NONE
-    gui_hint: ''
+    gui_hint: 6,0,1,1
     label1: ''
     label10: ''
     label2: ''
@@ -727,7 +765,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [688, 628.0]
+    coordinate: [696, 596.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_0_0_0
@@ -759,7 +797,7 @@ blocks:
     factor8: '1'
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_NONE
-    gui_hint: ''
+    gui_hint: 6,1,1,1
     label1: ''
     label10: ''
     label2: ''
@@ -802,11 +840,11 @@ blocks:
     comment: Widget to display spectrum, waterfall, etc.
     fc: (tune_freq_kHz-if_freq_kHz)*1000
     fftsize: '1024'
-    gui_hint: ''
+    gui_hint: 0,0,1,3
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: '""'
-    plotconst: 'True'
+    name: '"RF Signal Display"'
+    plotconst: 'False'
     plotfreq: 'True'
     plottime: 'True'
     plotwaterfall: 'True'
@@ -822,6 +860,35 @@ blocks:
     coordinate: [728, 44.0]
     rotation: 0
     state: true
+- name: qtgui_sink_x_0_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate/8
+    comment: Display the audio waveform
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: 3,0,1,3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Demodulated Audio Signal Display"'
+    plotconst: 'False'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: float
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1976, 236.0]
+    rotation: 0
+    state: enabled
 
 connections:
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
@@ -837,12 +904,14 @@ connections:
 - [blocks_moving_average_xx_0_0, '0', qtgui_number_sink_0_0_0, '0']
 - [blocks_multiply_const_vxx_0_0_1, '0', blocks_add_xx_0_1, '1']
 - [blocks_multiply_const_vxx_0_1, '0', audio_sink_0_0, '0']
+- [blocks_multiply_const_vxx_0_1, '0', fir_filter_xxx_0, '0']
 - [blocks_multiply_xx_0, '0', blocks_add_xx_0_1, '0']
 - [blocks_multiply_xx_0_0, '0', blocks_multiply_const_vxx_0_0_1, '0']
 - [blocks_stream_to_vector_0, '0', fft_vxx_0, '0']
 - [epy_block_0_0, '0', blocks_moving_average_xx_0, '0']
 - [epy_block_0_0, '1', blocks_moving_average_xx_0_0, '0']
 - [fft_vxx_0, '0', blocks_complex_to_mag_squared_0, '0']
+- [fir_filter_xxx_0, '0', qtgui_sink_x_0_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', blocks_complex_to_float_0, '0']
 - [iqbalance_fix_cc_0, '0', blocks_stream_to_vector_0, '0']
 - [iqbalance_fix_cc_0, '0', freq_xlating_fir_filter_xxx_0, '0']
